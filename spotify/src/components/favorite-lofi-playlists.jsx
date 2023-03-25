@@ -21,7 +21,6 @@ export default function GetPlaylists({ accessToken }) {
                 setName(res.data.tracks.items[0].track.name)
                 setArtist(res.data.tracks.items[0].track.artists[0].name)
                 setAlbum(res.data.tracks.items[0].track.album.name)
-                console.log(res)
             })
             .catch((err) => {
                 window.location = "/"
