@@ -1,10 +1,9 @@
-import useAuth from '../components/useAuth'
-import GetPlaylists from '../components/get-playlists'
+import GetPlaylists from '../components/favorite-lofi-playlists'
+import { useContext } from "react"
+import AccessContext from '../components/access-token'
 
 export default function FavoriteLofi({ code }) {
-    console.log(code)
-    const accessToken = useAuth(code)
-    console.log("accessToken", accessToken)
+    const { accessToken } = useContext(AccessContext)
     return (
         <>
             <GetPlaylists accessToken={accessToken} />

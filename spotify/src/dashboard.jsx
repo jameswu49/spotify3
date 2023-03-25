@@ -1,8 +1,10 @@
-import useAuth from "./components/useAuth"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import AccessContext from "./components/access-token"
 
 export default function Dashboard({ code }) {
-    const accessToken = useAuth(code)
+    const { accessToken } = useContext(AccessContext)
+    console.log(accessToken)
     return (
         <>
             <Header />
