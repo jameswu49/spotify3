@@ -4,6 +4,7 @@ import AccessContext from '../components/access-token'
 
 export default function FavoriteLofi({ code }) {
     const { accessToken } = useContext(AccessContext)
+
     return (
         <>
             <GetPlaylists accessToken={accessToken} />
