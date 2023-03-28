@@ -4,7 +4,6 @@ import AccessContext from "./components/access-token"
 
 export default function Dashboard({ code }) {
     const { accessToken } = useContext(AccessContext)
-    console.log(accessToken)
     return (
         <>
             <Header />

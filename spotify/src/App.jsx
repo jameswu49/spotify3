@@ -11,6 +11,8 @@ const code = new URLSearchParams(window.location.search).get("code")
 export default function App() {
   const accessToken = useAuth(code);
 
+  // console.log("AccessToken:", accessToken);
+  
   return (
     <>
       <AccessContext.Provider value={{ accessToken }}>
