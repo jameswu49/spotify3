@@ -5,26 +5,25 @@ export default function GetPlaylists({ accessToken }) {
     const [image, setImage] = useState([])
     const [name, setName] = useState([])
     const [artist, setArtist] = useState([])
-    const [album, setAlbum] = useState([])
-
 
     useEffect(() => {
         if (!accessToken) return
-        axios
-            .get("https://api.spotify.com/v1/playlists/2bLF11IvHran8chE9qMPDh", {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
+        axios.put('https://api.spotify.com/v1/me/player/play', {
+            context_uri: 'spotify:playlist:2bLF11IvHran8chE9qMPDh',
+            offset: {
+                position: 0
+            },
+            position_ms: 0
+        }, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+            .then(response => {
+                console.log(response.data);
             })
-            .then((res) => {
-                setImage(res.data.tracks.items[0].track.album.images[0].url)
-                setName(res.data.tracks.items[0].track.name)
-                setArtist(res.data.tracks.items[0].track.artists[0].name)
-                setAlbum(res.data.tracks.items[0].track.album.name)
-            })
-            .catch((err) => {
-                window.location = "/"
-                console.log(err)
+            .catch(error => {
+                console.log(error.response);
             })
     }, [accessToken, image])
 
@@ -33,7 +32,6 @@ export default function GetPlaylists({ accessToken }) {
             <Image image={image} />
             <Name name={name} />
             <Artist artist={artist} />
-            <Album album={album} />
         </>
     )
 
@@ -49,8 +47,4 @@ function Name({ name }) {
 
 function Artist({ artist }) {
     return <h2>{artist}</h2>
-}
-
-function Album({ album }) {
-    return <h3>{album}</h3>
 }
