@@ -19,7 +19,7 @@ app.post("/refresh", (req, res) => {
     const spotifyApi = new SpotifyWebApi({
         clientId: spotify_client_id,
         clientSecret: spotify_client_secret,
-        redirectUri: "https://lofi-player.herokuapp.com",
+        redirectUri: "http://localhost:3000",
         refreshToken
     })
 
@@ -36,7 +36,7 @@ app.post("/refresh", (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
+app.post('https://lofi-player.herokuapp.com/login', (req, res) => {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
         redirectUri: "https://lofi-player.herokuapp.com",
