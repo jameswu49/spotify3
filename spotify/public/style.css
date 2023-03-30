@@ -5,8 +5,13 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    overflow: hidden;
 }
 
 [data-component-name="Devices"] {
     display: none !important;
   }
+
+.PlayerRSWP {
+    margin-bottom: 3rem;
+}

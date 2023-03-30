@@ -8,6 +8,7 @@ import Player from "./components/spotify-player";
 
 const code = new URLSearchParams(window.location.search).get("code")
 
+
 export default function App() {
   const accessToken = useAuth(code);
 
@@ -17,8 +18,8 @@ export default function App() {
         <div>
           <Routes>
             <Route path="/" element={code ? <Dashboard code={code} /> : <Login />} />
-            <Route path="/favorite-lofi" element={code ? <Player token={accessToken} playlistId={"2bLF11IvHran8chE9qMPDh"} /> : <Login />} />
-            <Route path="/lofi-mood" element={code ? <Player token={accessToken} playlistId={"3SHjoboV9TGNANyWkYX3Lc"} /> : <Login />} />
+            <Route path="/favorite-lofi" element={code ? <Player token={accessToken} playlistId={"2bLF11IvHran8chE9qMPDh"} title="Favorite Lofi" /> : <Login />} />
+            <Route path="/lofi-mood" element={code ? <Player token={accessToken} playlistId={"3SHjoboV9TGNANyWkYX3Lc"} title="Lofi Mood" /> : <Login />} />
           </Routes>
         </div>
       </AccessContext.Provider>

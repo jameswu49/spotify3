@@ -56,19 +56,4 @@ app.post('/login', (req, res) => {
 
 })
 
-// app.get("https://api.spotify.com/v1/playlists/2bLF11IvHran8chE9qMPDh", (req, res) => {
-//     const spotifyApi = new SpotifyWebApi({
-//         clientId: "641ca7a434204e509b4c51ac6b20bd7b",
-//         clientSecret: "9c714bc6db70462f9f637535311e8a8c",
-//         redirectUri: "http://localhost:3000",
-//     })
-
-//     spotifyApi.getPlaylist('2bLF11IvHran8chE9qMPDh')
-//         .then(function (data) {
-//             console.log('Some information about this playlist', data.body);
-//         }, function (err) {
-//             console.log('Something went wrong!', err);
-//         });
-// })
-
 app.listen(3001, console.log("listening on port 3001")) 
