@@ -4,5 +4,14 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+[data-component-name="Devices"] {
+    display: none !important;
+  }
+
+.PlayerRSWP {
+    margin-bottom: 3rem;
 }
