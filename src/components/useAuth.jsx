@@ -6,45 +6,29 @@ export default function useAuth(code) {
     const [refreshToken, setRefreshToken] = useState()
     const [expiresIn, setExpiresIn] = useState()
 
-    // useEffect(() => {
-    //     if (!code) return
-    //     axios
-    //         .post('https://lofi-player.herokuapp.com/login', {
-    //             code,
-    //         })
-    //         .then(res => {
-    //             setAccessToken(res.data.accessToken)
-    //             setRefreshToken(res.data.refreshToken)
-    //             setExpiresIn(res.data.expiresIn)
-    //             window.history.pushState({}, null, "/")
-    //         })
-    //         .catch((err) => {
-    //             // window.location = "/"
-    //             console.log(err.response)
-    //         })
-    // }, [code])
-
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('code');
-        if (!code) return;
-        axios.get(`https://lofi-player.herokuapp.com/login?code=${code}`)
+        if (!code) return
+        axios
+            .post('http://localhost:3001/login', {
+                code,
+            })
             .then(res => {
-                setAccessToken(res.data.accessToken);
-                setRefreshToken(res.data.refreshToken);
-                setExpiresIn(res.data.expiresIn);
-                window.history.pushState({}, null, "/");
+                setAccessToken(res.data.accessToken)
+                setRefreshToken(res.data.refreshToken)
+                setExpiresIn(res.data.expiresIn)
+                window.history.pushState({}, null, "/")
             })
             .catch((err) => {
-                console.log(err.response);
-            });
-    }, []);
+                // window.location = "/"
+                console.log(err.response)
+            })
+    }, [code])
 
     useEffect(() => {
         if (!refreshToken || !expiresIn) return
         const interval = setInterval(() => {
             axios
-                .post('https://lofi-player.herokuapp.com/refresh', {
+                .post('http://localhost:3001/refresh', {
                     refreshToken,
                 })
                 .then(res => {

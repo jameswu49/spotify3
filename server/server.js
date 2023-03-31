@@ -2,12 +2,11 @@ const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const SpotifyWebApi = require("spotify-web-api-node")
+const port = process.env.PORT || 3001
 require('dotenv').config({ path: '../.env' });
-const port = process.env.PORT || 3001;
 
 
-
-const spotify_client_id = "641ca7a434204e509b4c51ac6b20bd7b"
+const spotify_client_id = process.env.SPOTIFY_CLIENT_ID
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET
 
 const app = express()
@@ -36,35 +35,25 @@ app.post("/refresh", (req, res) => {
     })
 })
 
-app.get('/login', (req, res) => {
-    try {
-        const spotifyApi = new SpotifyWebApi({
-            clientId: spotify_client_id,
-            clientSecret: spotify_client_secret,
-            redirectUri: "https://lofi-player.herokuapp.com/callback"
-        });
+app.post('/login', (req, res) => {
+    const code = req.body.code
+    const spotifyApi = new SpotifyWebApi({
+        redirectUri: "https://lofi-player.herokuapp.com/callback",
+        clientId: spotify_client_id,
+        clientSecret: spotify_client_secret,
+    })
 
-        const authorizeUrl = spotifyApi.createAuthorizeURL([
-            'user-read-private',
-            'user-read-email',
-            'user-library-read',
-            'user-library-modify',
-            'user-read-playback-state',
-            'user-modify-playback-state',
-            'playlist-modify-public',
-            'playlist-modify-private',
-            'playlist-read-private',
-            'streaming',
-        ]);
+    spotifyApi.authorizationCodeGrant(code).then(data => {
+        res.json({
+            accessToken: data.body.access_token,
+            refreshToken: data.body.refresh_token,
+            expiresIn: data.body.expires_in
+        })
+    }).catch((err) => {
+        res.sendStatus(400)
+    })
 
-        res.redirect(authorizeUrl);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
-});
-
-
+})
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
