@@ -9,7 +9,7 @@ export default function useAuth(code) {
     useEffect(() => {
         if (!code) return
         axios
-            .post('https://lofi-player.herokuapp.com/refresh/login', {
+            .post('https://lofi-player.herokuapp.com/login', {
                 code,
             })
             .then(res => {
