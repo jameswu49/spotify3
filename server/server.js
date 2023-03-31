@@ -36,25 +36,35 @@ app.post("/refresh", (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
-    const code = req.body.code
-    const spotifyApi = new SpotifyWebApi({
-        redirectUri: "https://lofi-player.herokuapp.com/callback",
-        clientId: spotify_client_id,
-        clientSecret: spotify_client_secret,
-    })
+app.get('/login', (req, res) => {
+    try {
+        const spotifyApi = new SpotifyWebApi({
+            clientId: spotify_client_id,
+            clientSecret: spotify_client_secret,
+            redirectUri: "https://lofi-player.herokuapp.com/callback"
+        });
 
-    spotifyApi.authorizationCodeGrant(code).then(data => {
-        res.json({
-            accessToken: data.body.access_token,
-            refreshToken: data.body.refresh_token,
-            expiresIn: data.body.expires_in
-        })
-    }).catch((err) => {
-        res.sendStatus(400)
-    })
+        const authorizeUrl = spotifyApi.createAuthorizeURL([
+            'user-read-private',
+            'user-read-email',
+            'user-library-read',
+            'user-library-modify',
+            'user-read-playback-state',
+            'user-modify-playback-state',
+            'playlist-modify-public',
+            'playlist-modify-private',
+            'playlist-read-private',
+            'streaming',
+        ]);
 
-})
+        res.redirect(authorizeUrl);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
