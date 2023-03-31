@@ -1,4 +1,4 @@
-const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=641ca7a434204e509b4c51ac6b20bd7b&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-read-private%20user-read-playback-state%20user-read-email%20user-modify-playback-state"
+const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=641ca7a434204e509b4c51ac6b20bd7b&response_type=code&redirect_uri=https://lofi-player.herokuapp.com/callback&scope=streaming%20user-read-private%20user-read-playback-state%20user-read-email%20user-modify-playback-state"
 
 export default function Login() {
     return (

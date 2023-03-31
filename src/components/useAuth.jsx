@@ -9,7 +9,7 @@ export default function useAuth(code) {
     useEffect(() => {
         if (!code) return
         axios
-            .post('/login', {
+            .post('https://lofi-player.herokuapp.com/refresh/login', {
                 code,
             })
             .then(res => {
@@ -28,7 +28,7 @@ export default function useAuth(code) {
         if (!refreshToken || !expiresIn) return
         const interval = setInterval(() => {
             axios
-                .post('http://localhost:3001/refresh', {
+                .post('https://lofi-player.herokuapp.com/refresh', {
                     refreshToken,
                 })
                 .then(res => {
