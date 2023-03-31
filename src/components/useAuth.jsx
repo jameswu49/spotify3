@@ -24,27 +24,44 @@ export default function useAuth(code) {
             })
     }, [code])
 
+    // useEffect(() => {
+    //     if (!refreshToken || !expiresIn) return
+    //     const interval = setInterval(() => {
+    //         axios
+    //             .post('https://lofi-player.herokuapp.com/refresh', {
+    //                 refreshToken,
+    //             })
+    //             .then(res => {
+    //                 setAccessToken(res.data.accessToken)
+    //                 setExpiresIn(res.data.expiresIn)
+    //                 window.history.pushState({}, null, "/")
+    //             })
+    //             .catch((err) => {
+    //                 // window.location = "/"
+    //                 console.log(err.response)
+    //             })
+    //     }, (expiresIn - 60) * 1000)
+
+    //     return () => clearInterval(interval)
+
+    // }, [refreshToken, expiresIn])
+
     useEffect(() => {
-        if (!refreshToken || !expiresIn) return
-        const interval = setInterval(() => {
-            axios
-                .post('https://lofi-player.herokuapp.com/refresh', {
-                    refreshToken,
-                })
-                .then(res => {
-                    setAccessToken(res.data.accessToken)
-                    setExpiresIn(res.data.expiresIn)
-                    window.history.pushState({}, null, "/")
-                })
-                .catch((err) => {
-                    // window.location = "/"
-                    console.log(err.response)
-                })
-        }, (expiresIn - 60) * 1000)
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        if (!code) return;
+        axios.get(`https://lofi-player.herokuapp.com/login?code=${code}`)
+            .then(res => {
+                setAccessToken(res.data.accessToken);
+                setRefreshToken(res.data.refreshToken);
+                setExpiresIn(res.data.expiresIn);
+                window.history.pushState({}, null, "/");
+            })
+            .catch((err) => {
+                console.log(err.response);
+            });
+    }, []);
 
-        return () => clearInterval(interval)
-
-    }, [refreshToken, expiresIn])
 
     return accessToken
 }
