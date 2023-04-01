@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 
 export default function Player({ playlistId, title }) {
     const { accessToken } = useContext(AccessContext)
-
     const [backgroundImage, setBackgroundImage] = useState('default.jpg');
 
     useEffect(() => {
@@ -32,7 +31,7 @@ export default function Player({ playlistId, title }) {
                 <SpotifyPlayer
                     token={accessToken}
                     uris={[`spotify:playlist:${playlistId}`]}
-                    play={false}
+                    play={true}
                     hideAttribution={true}
                     hideCoverArt={false}
                     styles={{

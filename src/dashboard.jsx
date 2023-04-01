@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useContext } from "react"
 import AccessContext from "./components/access-token"
 
-export default function Dashboard({ code }) {
+export default function Dashboard() {
     const { accessToken } = useContext(AccessContext)
     return (
         <section className="h-screen md:flex md:flex-col md:justify-center">
