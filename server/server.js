@@ -8,7 +8,7 @@ const port = process.env.PORT || 3001
 
 var client_id = "641ca7a434204e509b4c51ac6b20bd7b" // Your client id
 var client_secret = "9c714bc6db70462f9f637535311e8a8c"; // Your secret
-var redirect_uri = 'http://localhost:3001/callback'; // Your redirect uri
+var redirect_uri = 'https://lofi-player.herokuapp.com/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
