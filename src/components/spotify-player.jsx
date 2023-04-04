@@ -8,10 +8,19 @@ export default function Player({ playlistId, title }) {
     const { accessToken } = useContext(AccessContext)
     const [backgroundImage, setBackgroundImage] = useState('default.jpg');
 
+    const favoriteLofiImages = ["images/starwars.gif", "images/background.gif", "images/walking.gif", "images/beach.gif", "images/rain.gif", "images/games.gif"]
+
+    function getRandomImage(arr) {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        return arr[randomIndex];
+    }
+
+
     useEffect(() => {
         function handleKeyDown(event) {
             if (event.key === "g") {
-                setBackgroundImage("images/starwars.gif");
+                const randomElement = getRandomImage(favoriteLofiImages);
+                setBackgroundImage(randomElement);
             }
         }
 
@@ -31,7 +40,7 @@ export default function Player({ playlistId, title }) {
                 <SpotifyPlayer
                     token={accessToken}
                     uris={[`spotify:playlist:${playlistId}`]}
-                    play={true}
+                    play={false}
                     hideAttribution={true}
                     hideCoverArt={false}
                     styles={{

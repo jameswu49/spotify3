@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap');
+
+
 body {
     background-image: url("images/background.gif");
     height: 100%;
@@ -6,6 +9,8 @@ body {
     background-size: cover;
     background-attachment: fixed;
     overflow: hidden;
+    font-family: "Baloo Chettan 2", sans-serif;
+
 }
 
 [data-component-name="Devices"] {
@@ -14,4 +19,8 @@ body {
 
 .PlayerRSWP {
     margin-bottom: 3rem;
+}
+
+.baloo {
+    font-family: "Baloo Chettan 2", sans-serif;
 }
