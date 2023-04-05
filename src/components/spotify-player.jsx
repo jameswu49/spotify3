@@ -8,7 +8,7 @@ export default function Player({ playlistId, title }) {
     const { accessToken } = useContext(AccessContext)
     const [backgroundImage, setBackgroundImage] = useState('default.jpg');
 
-    const favoriteLofiImages = ["images/starwars.gif", "images/background.gif", "images/walking.gif", "images/beach.gif", "images/rain.gif", "images/games.gif"]
+    const favoriteLofiImages = ["images/starwars.gif", "images/background.gif", "images/walking.gif", "images/beach.gif", "images/rain.gif", "images/games.gif", "images/retro.gif", "images/smoke.gif", "images/boy.gif"]
 
     function getRandomImage(arr) {
         const randomIndex = Math.floor(Math.random() * arr.length);
@@ -34,7 +34,7 @@ export default function Player({ playlistId, title }) {
 
 
     return (
-        <div className='bg-cover' style={{ backgroundImage: `url(${backgroundImage})`, height: "100vh" }}>
+        <div className='bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${backgroundImage})`, height: "100vh" }}>
             <NavBar title={title} />
             <div className='flex flex-col justify-end items-center h-screen'>
                 <SpotifyPlayer

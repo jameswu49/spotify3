@@ -19,7 +19,7 @@ export default function NavBar({ title }) {
 
     return (
         <>
-            <nav className="flex justify-between">
+            <nav className="flex justify-between relative z-10">
                 <Link to={"/callback"}>
                     <h1 className='text-white mt-4 ml-4 cursor-pointer md:text-base lg:text-lg 2xl:text-2xl'>&lt; Back</h1>
                 </Link>

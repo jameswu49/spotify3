@@ -1,11 +1,30 @@
 export default function Modal({ text }) {
     return (
-        <div className="bg-black bg-opacity-40 h-full w-full fixed hidden modal 2xl:text-2xl">
-            <h1 className="h-3/6 flex items-end mt-5 md:mx-20 lg:mx-40 2xl:mx-64">{urlParam()}</h1>
-            <p className="h-20 flex items-end">
-                <a className="text-white mx-10 w-fit underline md:mx-28 lg:mx-48 2xl:mx-72" target="_blank" rel="noopener noreferrer" href={playlist()}>Follow My Playlist</a>
-            </p>
+        <div className="bg-black bg-opacity-40 h-full w-full fixed hidden modal top-0 2xl:text-2xl">
+            <About />
+            <Directions />
+            <FollowPlaylist />
         </div>
+    )
+}
+
+function About() {
+    return (
+        <h1 className="h-3/6 flex items-end mt-5 md:mx-20 lg:mx-40 2xl:mx-64">{urlParam()}</h1>
+    )
+}
+
+function Directions() {
+    return (
+        <p className="text-white mx-10 w-fit mt-10 md:mx-28 lg:mx-48 2xl:mx-72">Press <span className="text-red-500">g</span> to change background</p>
+    )
+}
+
+function FollowPlaylist() {
+    return (
+        <p className="h-20 flex items-end">
+            <a className="text-white mx-10 w-fit underline md:mx-28 lg:mx-48 2xl:mx-72" target="_blank" rel="noopener noreferrer" href={playlist()}>Follow My Playlist</a>
+        </p>
     )
 }
 
