@@ -11,6 +11,8 @@ require('dotenv').config({ path: '../.env' });
 const client_id = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 const redirect_uri = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
+
 
 /**
  * Generates a random string containing numbers and letters
@@ -45,14 +47,15 @@ app.get('/login', function (req, res) {
 
     // your application requests authorization
     const scope = 'streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state';
-    res.redirect('https://accounts.spotify.com/authorize?' +
-        querystring.stringify({
-            response_type: 'code',
-            client_id: client_id,
-            scope: scope,
-            redirect_uri: redirect_uri,
-            state: state
-        }));
+    // res.redirect('https://accounts.spotify.com/authorize?' +
+    const queryParams = querystring.stringify({
+        response_type: 'code',
+        client_id: client_id,
+        scope: scope,
+        redirect_uri: redirect_uri,
+        state: state
+    });
+    res.redirect(`${FRONTEND_URI}/?${queryParams}`);
 });
 
 app.get('/callback', function (req, res) {
@@ -65,7 +68,7 @@ app.get('/callback', function (req, res) {
     const storedState = req.cookies ? req.cookies[stateKey] : null;
 
     if (state === null || state !== storedState) {
-        res.redirect('https://lofi-player.herokuapp.com/callback' +
+        res.redirect('http://localhost:3001/callback' +
             querystring.stringify({
                 error: 'state_mismatch'
             }));
@@ -102,13 +105,13 @@ app.get('/callback', function (req, res) {
                 });
 
                 // we can also pass the token to the browser to make requests from there
-                res.redirect('https://lofi-player.herokuapp.com/callback#' +
+                res.redirect('http://localhost:3000/callback#' +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
                     }));
             } else {
-                res.redirect('https://lofi-player.herokuapp.com/#' +
+                res.redirect('http://localhost:3000/#' +
                     querystring.stringify({
                         error: 'invalid_token'
                     }));
