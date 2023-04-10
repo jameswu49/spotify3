@@ -1,10 +1,13 @@
-const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=641ca7a434204e509b4c51ac6b20bd7b&response_type=code&redirect_uri=http://localhost:3000/callback&scope=streaming%20user-read-private%20user-read-playback-state%20user-read-email%20user-modify-playback-state"
+const LOGIN_URI =
+    process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:3001/login'
+        : 'https://lofi-player.herokuapp.com/login';
 
 export default function Login() {
     return (
         <div className="flex justify-center items-center h-screen">
             <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                <a href="http://localhost:3001/login">Log in to Spotify</a>
+                <a href={LOGIN_URI}>Log in to Spotify</a>
             </button>
         </div >
     )

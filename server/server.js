@@ -8,7 +8,6 @@ const port = process.env.PORT || 3001
 require('dotenv').config({ path: '../.env' });
 
 
-
 const client_id = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 const redirect_uri = process.env.REDIRECT_URI;
@@ -66,7 +65,7 @@ app.get('/callback', function (req, res) {
     const storedState = req.cookies ? req.cookies[stateKey] : null;
 
     if (state === null || state !== storedState) {
-        res.redirect('http://localhost:3001/callback' +
+        res.redirect('https://lofi-player.herokuapp.com/callback' +
             querystring.stringify({
                 error: 'state_mismatch'
             }));
@@ -103,13 +102,13 @@ app.get('/callback', function (req, res) {
                 });
 
                 // we can also pass the token to the browser to make requests from there
-                res.redirect('http://localhost:3000/callback#' +
+                res.redirect('https://lofi-player.herokuapp.com/callback#' +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
                     }));
             } else {
-                res.redirect('http://localhost:3000/#' +
+                res.redirect('https://lofi-player.herokuapp.com/#' +
                     querystring.stringify({
                         error: 'invalid_token'
                     }));
