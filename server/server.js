@@ -3,6 +3,7 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+const path = require('path');
 const port = process.env.PORT || 3001
 
 
@@ -28,6 +29,9 @@ var generateRandomString = function (length) {
 var stateKey = 'spotify_auth_state';
 
 var app = express();
+
+const publicPath = path.join(__dirname, '..', 'public');
+app.use(express.static(publicPath));
 
 app.use(express.static(__dirname + '/public'))
     .use(cors())
@@ -134,6 +138,10 @@ app.get('/refresh_token', function (req, res) {
             });
         }
     });
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 app.listen(port, () => {
