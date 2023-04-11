@@ -11,8 +11,6 @@ require('dotenv').config({ path: '../.env' });
 const client_id = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 const redirect_uri = process.env.REDIRECT_URI;
-const FRONTEND_URI = process.env.FRONTEND_URI;
-
 
 /**
  * Generates a random string containing numbers and letters
@@ -47,16 +45,14 @@ app.get('/login', function (req, res) {
 
     // your application requests authorization
     const scope = 'streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state';
-    // res.redirect('https://accounts.spotify.com/authorize?' +
-    const queryParams = querystring.stringify({
-        response_type: 'code',
-        client_id: client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-        state: state
-    });
-    res.redirect(`${FRONTEND_URI}/?${queryParams}`);
-
+    res.redirect('https://accounts.spotify.com/authorize?' +
+        querystring.stringify({
+            response_type: 'code',
+            client_id: client_id,
+            scope: scope,
+            redirect_uri: redirect_uri,
+            state: state
+        }));
 });
 
 app.get('/callback', function (req, res) {
