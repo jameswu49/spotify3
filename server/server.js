@@ -8,7 +8,7 @@ const port = process.env.PORT || 3001
 require('dotenv').config({ path: '../.env' });
 
 
-const client_id = process.env.SPOTIFY_CLIENT_ID
+const client_id = "641ca7a434204e509b4c51ac6b20bd7b"
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 const redirect_uri = process.env.REDIRECT_URI;
 
