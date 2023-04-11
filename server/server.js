@@ -56,6 +56,7 @@ app.get('/login', function (req, res) {
         state: state
     });
     res.redirect(`${FRONTEND_URI}/?${queryParams}`);
+
 });
 
 app.get('/callback', function (req, res) {
