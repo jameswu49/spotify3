@@ -1,7 +1,9 @@
-const LOGIN_URI =
-    process.env.NODE_ENV !== 'production'
-        ? 'http://localhost:3001/login'
-        : 'https://lofi-player.herokuapp.com/login';
+// const LOGIN_URI =
+//     process.env.NODE_ENV !== 'production'
+//         ? 'http://localhost:3001/login'
+//         : 'https://lofi-player.herokuapp.com/login';
+
+const LOGIN_URI = 'https://lofi-player.herokuapp.com/login'
 
 export default function Login() {
     return (
