@@ -32,7 +32,7 @@ export default function App() {
       <AccessContext.Provider value={{ accessToken }}>
         <div>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/callback" element={<Dashboard code={accessToken} />} />
             <Route path="/favorite-lofi" element={<Player token={accessToken} playlistId={"2bLF11IvHran8chE9qMPDh"} title="Favorite Lofi" />} />
             <Route path="/lofi-mood" element={accessToken ? <Player token={accessToken} playlistId={"3SHjoboV9TGNANyWkYX3Lc"} title="Lofi Mood" /> : <Login />} />
