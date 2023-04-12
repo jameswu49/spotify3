@@ -10,7 +10,7 @@ require('dotenv').config({ path: '../.env' });
 
 const client_id = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
-const redirect_uri = 'https://lofi-player.herokuapp.com/' || 'http://localhost:3001/callback'
+const redirect_uri = 'https://lofi-player.herokuapp.com/callback'
 
 /**
  * Generates a random string containing numbers and letters
