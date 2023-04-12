@@ -8,9 +8,9 @@ const port = process.env.PORT || 3001
 require('dotenv').config({ path: '../.env' });
 
 
-const client_id = "641ca7a434204e509b4c51ac6b20bd7b"
-const client_secret = '9c714bc6db70462f9f637535311e8a8c'
-const redirect_uri = "https://lofi-player.herokuapp.com/callback";
+const client_id = process.env.SPOTIFY_CLIENT_ID
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET
+const redirect_uri = 'http://localhost:3001/callback'
 
 /**
  * Generates a random string containing numbers and letters
@@ -64,12 +64,8 @@ app.get('/callback', function (req, res) {
     const state = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;
 
-    console.log("code: " + code);
-    console.log("state: " + state);
-    console.log("storedState: " + storedState);
-
     if (state === null || state !== storedState) {
-        res.redirect('https://lofi-player.herokuapp.com/callback' +
+        res.redirect('http://localhost:3000/callback' +
             querystring.stringify({
                 error: 'state_mismatch'
             }));
@@ -102,17 +98,17 @@ app.get('/callback', function (req, res) {
 
                 // use the access token to access the Spotify Web API
                 request.get(options, function (error, response, body) {
-                    console.log(body);
+                    // console.log(body);
                 });
 
                 // we can also pass the token to the browser to make requests from there
-                res.redirect('https://lofi-player.herokuapp.com/callback#' +
+                res.redirect('http://localhost:3000/callback#' +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
                     }));
             } else {
-                res.redirect('https://lofi-player.herokuapp.com/#' +
+                res.redirect('http://localhost:3001/#' +
                     querystring.stringify({
                         error: 'invalid_token'
                     }));
