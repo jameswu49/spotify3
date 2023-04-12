@@ -8,9 +8,10 @@ const port = process.env.PORT || 3001
 require('dotenv').config({ path: '../.env' });
 
 
-const client_id = '641ca7a434204e509b4c51ac6b20bd7b'
-const client_secret = '9c714bc6db70462f9f637535311e8a8c'
-const redirect_uri = 'http://localhost:3001/callback'
+const client_id = process.env.SPOTIFY_CLIENT_ID
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET
+const frontend_uri = process.env.FRONTEND_URI
+const redirect_uri = process.env.REDIRECT_URI
 
 /**
  * Generates a random string containing numbers and letters
@@ -65,7 +66,7 @@ app.get('/callback', function (req, res) {
     const storedState = req.cookies ? req.cookies[stateKey] : null;
 
     if (state === null || state !== storedState) {
-        res.redirect('https://lofi-player.herokuapp.com/callback' +
+        res.redirect(frontend_uri + 'callback' +
             querystring.stringify({
                 error: 'state_mismatch'
             }));
@@ -102,13 +103,13 @@ app.get('/callback', function (req, res) {
                 });
 
                 // we can also pass the token to the browser to make requests from there
-                res.redirect('https://lofi-player.herokuapp.com/callback#' +
+                res.redirect(frontend_uri + 'callback#' +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
                     }));
             } else {
-                res.redirect('https://lofi-player.herokuapp.com/#' +
+                res.redirect(frontend_uri + '#' + 
                     querystring.stringify({
                         error: 'invalid_token'
                     }));
