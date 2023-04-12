@@ -9,7 +9,7 @@ require('dotenv').config({ path: '../.env' });
 
 
 const client_id = "641ca7a434204e509b4c51ac6b20bd7b"
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET
+const client_secret = '9c714bc6db70462f9f637535311e8a8c'
 const redirect_uri = "https://lofi-player.herokuapp.com/callback";
 
 /**
