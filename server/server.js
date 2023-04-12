@@ -63,7 +63,11 @@ app.get('/callback', function (req, res) {
     const code = req.query.code || null;
     const state = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;
-    
+
+    console.log("code: " + code);
+    console.log("state: " + state);
+    console.log("storedState: " + storedState);
+
     if (state === null || state !== storedState) {
         res.redirect('https://lofi-player.herokuapp.com/callback' +
             querystring.stringify({
