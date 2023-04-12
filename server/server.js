@@ -109,7 +109,7 @@ app.get('/callback', function (req, res) {
                         refresh_token: refresh_token
                     }));
             } else {
-                res.redirect(frontend_uri + '#' + 
+                res.redirect(frontend_uri + '#' +
                     querystring.stringify({
                         error: 'invalid_token'
                     }));
